@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 
-class Utility() {
+class Utility {
     companion object {
         private const val NOTIFICATION_ID = 1
         private var mNotificationManager: NotificationManager? = null
@@ -46,9 +46,11 @@ class Utility() {
                 e.printStackTrace()
             }
         }
+
         fun cancelNotification() {
             mNotificationManager?.cancel(NOTIFICATION_ID)
         }
+
         private fun getContentIntent(mContext: Context): PendingIntent {
             val notificationIntent = Intent(mContext, MainActivity::class.java)
             return PendingIntent.getActivity(
@@ -64,47 +66,45 @@ class Utility() {
             var currentSeconds: Long = (currentDuration / 1000).toLong()
             var totalSeconds: Long = (totalDuration / 1000).toLong()
 
-            //calculating percentage
+            // Calculating percentage
             percentage = (currentSeconds.toDouble() / totalSeconds) * 100
 
-            //return percentage
+            // Return percentage
             return percentage.toInt()
-
         }
 
         fun progressToTimer(progress: Int, totalDuration: Int): Int {
-            var currentDuration = 0;
-            var total = (totalDuration / 1000).toInt()
+            var currentDuration = 0
+            var total = (totalDuration / 100).toInt()
             currentDuration = ((progress.toDouble() / 100) * total).toInt()
 
-            //return current duration in milliseconds
+            // Return current duration in milliseconds
             return currentDuration * 1000
         }
 
         fun milliSecondsToTimer(milliseconds: Long): String {
             var finalTimerString = ""
-            var secondsString = ""
+            var secondsString: String
 
-            //Convert total duration into time
+            // Convert total duration into time
             var hours = (milliseconds / (1000 * 60 * 60)).toInt()
             var minutes = ((milliseconds % (1000 * 60 * 60)) / (1000 * 60)).toInt()
-            var seconds = (((milliseconds % (1000 * 60 * 60)) % (1000 * 60)) / 100).toInt()
+            var seconds = (((milliseconds % (1000 * 60 * 60)) % (1000 * 60)) / 1000).toInt()
 
-            //Add hours if there
+            // Add hours if there
             if (hours > 0) {
                 finalTimerString = "$hours:"
             }
-            //Pre appending 0 to seconds if it is one digit
-            if (seconds < 10) {
-                secondsString = "0$seconds"
+            // Prepending 0 to seconds if it is one digit
+            secondsString = if (seconds < 10) {
+                "0$seconds"
             } else {
-                secondsString = "$seconds"
+                "$seconds"
             }
             finalTimerString = "$finalTimerString$minutes:$secondsString"
 
-            //return timer string
+            // Return timer string
             return finalTimerString
-
         }
     }
 }

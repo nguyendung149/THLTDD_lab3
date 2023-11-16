@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -13,7 +12,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var btnPlay: ImageButton
         lateinit var btnStop:ImageButton
-        lateinit var textViewSongTime:TextView
+        lateinit var elapsedTime : TextView
+        lateinit var remainingTime : TextView
         lateinit var seekBar:SeekBar
         lateinit var btnLyric:ImageButton
         lateinit var lyricView: TextView
@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         btnPlay = findViewById(R.id.btnPlay)
         btnStop = findViewById(R.id.btnStop)
         seekBar = findViewById(R.id.seekBar)
-        textViewSongTime = findViewById(R.id.textViewSongTime)
+        elapsedTime = findViewById(R.id.elapsedTime)
+        remainingTime = findViewById(R.id.remainingTime)
         lyricView = findViewById(R.id.textViewLyric)
         btnLyric = findViewById(R.id.btnViewLyrics)
         var isLyricsVisible = true
