@@ -86,7 +86,7 @@ class PlayerInService():Service(),OnClickListener,MediaPlayer.OnCompletionListen
     }
     fun updateProgressBar(){
         try {
-            progressBarHandler.postDelayed(mUpdateTimeTask,1000)
+            progressBarHandler.postDelayed(mUpdateTimeTask,100)
             Log.i("MMM",mUpdateTimeTask.toString())
         }catch(e:Exception){
             e.printStackTrace()
@@ -104,7 +104,7 @@ class PlayerInService():Service(),OnClickListener,MediaPlayer.OnCompletionListen
                 var progress = Utility.getProgressPercentage(currentDuration,totalDuration).toInt()
                 Log.d("DUNG",progress.toString())
                 songProgressBar.get()?.progress = progress //Running this thread after 100 millision
-                progressBarHandler.postDelayed(this,1000)
+                progressBarHandler.postDelayed(this,100)
             }catch (e:Exception){
                 e.printStackTrace()
             }
